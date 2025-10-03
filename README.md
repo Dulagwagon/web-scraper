@@ -8,7 +8,7 @@ Este projeto demonstra domínio das seguintes habilidades:
 
 * **Web Scraping Avançado:** Utilização do framework **Scrapy** para estruturação do *crawler*.
 * **Renderização de JavaScript:** Integração com **Scrapy-Playwright** para renderizar o conteúdo dinâmico (componentes de produto e variações de cor), garantindo a coleta de dados que não estão no HTML estático.
-* **Persistência de Dados:** Implementação de um **Pipeline** customizado para salvar os dados em um banco de dados **SQLite** (`chicorei_data.db`), em vez de apenas arquivos CSV.
+* **Persistência de Dados:** Implementação de um **Pipeline** customizado para salvar os dados em um banco de dados **SQLite** (`chicorei_data.db`), em vez de apenas arquivos CSV [FUTURO UPDATE].
 * **Tratamento e Mapeamento de Dados:** Engenharia de código para extrair e mapear códigos **RGB** para nomes de cores legíveis (ex: `rgb(0, 0, 0)` -> `Preto Noir`).
 
 ## 🛠️ Como Rodar o Projeto Localmente

@@ -106,6 +106,10 @@ ITEM_PIPELINES = {
 
 # Set settings whose default value is deprecated to a future-proof value
 FEED_EXPORT_ENCODING = "utf-8"
+# Adicione esta linha: Define o ponto e vírgula como separador de colunas padrão
+FEED_EXPORT_FIELDS = ['nome_produto', 'link_produto', 'preco_atual', 'link_imagem', 'cor_disponivel', 'data_raspagem']
+FEED_EXPORT_ITEM_FIELDS = FEED_EXPORT_FIELDS
+FEED_EXPORT_SEPARATOR = ';'
 
 #New code
 # --- Configurações de Cortesia e Identificação ---

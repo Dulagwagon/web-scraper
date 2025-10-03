@@ -7,32 +7,28 @@ from itemloaders.processors import TakeFirst, MapCompose
 import re
 
 # Função auxiliar para extrair e converter o preço
+# Função para garantir que o preço seja float (ponto decimal)
 def parse_price(value):
-    """
-    Extrai o valor numérico de uma string de preço (geralmente de um atributo content)
-    e o converte para float.
-    Exemplo: 'R$ 1.234,56' -> 1234.56
-    """
-    if isinstance(value, str):
-        # Encontra o padrão de preço (pode conter R$, cifras, espaços, pontos, vírgulas)
-        # e remove tudo que não for dígito ou separador decimal (vírgula/ponto)
-        # A expressão regular simplificada foca em números e separadores
-        cleaned_value = re.sub(r'[^\d,.]', '', value)
+    str_value = str(value) 
+    
+    # 1. Se houver vírgula, troca por ponto (ex: '39,90' -> '39.90')
+    str_value = str_value.replace(',', '.') 
+    
+    # 2. Tenta converter para float.
+    try:
+        # Arredonda para 2 casas decimais para evitar problemas de float.
+        return round(float(str_value), 2)
+    except ValueError:
+        return None 
 
-        # Trata o formato brasileiro (vírgula como separador decimal)
-        if ',' in cleaned_value and '.' in cleaned_value:
-            # Caso raro onde pode ter ambos, assume-se o ponto como separador de milhar
-            # e a vírgula como separador decimal (padrão brasileiro).
-            cleaned_value = cleaned_value.replace('.', '')
-            cleaned_value = cleaned_value.replace(',', '.')
-        elif ',' in cleaned_value:
-            # Apenas vírgula, assume-se separador decimal
-            cleaned_value = cleaned_value.replace(',', '.')
-        try:
-            return float(cleaned_value)
-        except ValueError:
-            return None
-    return value
+class CamisetaItem(scrapy.Item):
+    # ... outros campos ...
+    
+    preco_atual = scrapy.Field(
+        # Aplica a função parse_price para garantir a conversão para float
+        input_processor=MapCompose(parse_price),
+        output_processor=TakeFirst()
+    )
 
 
 class CamisetaItem(scrapy.Item):

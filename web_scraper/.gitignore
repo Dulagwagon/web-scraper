@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+
+# Ambientes Virtuais
+venv/
+env/
+.env
+
+# Scrapy
+.scrapy/
+
+# Dados e Logs (NÃO DEVEM SUBIR PARA O GITHUB)
+*.db
+*.csv
+*.log
+
+# Windows
+Thumbs.db
